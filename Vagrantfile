@@ -2,16 +2,17 @@ VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Configure The Box
-  config.vm.box = 'bento/ubuntu-14.04'
+  config.vm.box = 'bento/ubuntu-14.04-i386'
   config.vm.hostname = 'homestead'
 
   # Don't Replace The Default Key https://github.com/mitchellh/vagrant/pull/4707
   config.ssh.insert_key = false
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ['modifyvm', :id, '--memory', '2048']
+    vb.customize ['modifyvm', :id, '--memory', '1024']
     vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
     vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    vb.customize ['modifyvm', :id, '--nictype1', 'Am79C973']
   end
 
   config.vm.provider :vmware_fusion do |v|
